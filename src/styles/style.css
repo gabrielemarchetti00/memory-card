@@ -1,5 +1,40 @@
-.cards > *{
+.App{
+    height: 98vh;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+
+.header{
     height: 100px;
-    width: 100px;
-    border: 1px solid;
+    display: flex;
+    justify-content: space-between;
+}
+
+.title{
+    font-size: 70px;
+}
+
+.score{
+    font-size: 25px;
+    margin-top: 20px;
+    margin-right: 40px;
+}
+
+.card-container{
+    height: 90%;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(2, 1fr 1fr);
+    gap: 35px;
+}
+
+img{
+    height: 350px;
+    width: 350px;
+}
+
+img:hover{
+    opacity: 0.5;
 }
