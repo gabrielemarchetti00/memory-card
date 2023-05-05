@@ -79,15 +79,19 @@ const App = () => {
     const [cards, setCards] = useState(cardArray)
     const [current, setCurrent] = useState(0)
     const [best, setBest] = useState(0)
+    let restart = false
 
     function handleClick(e) {
         updateScore(e)
-        setCards(cards.map(function(card) {
-          if(card.text === Number(e.target.id)) {
-              card.pick = true
-          }
-          return card
-        }))
+        if(restart === false) {
+          setCards(cards.map(function(card) {
+            if(card.text === Number(e.target.id)) {
+                card.pick = true
+            }
+            return card
+          }))
+        }
+        restart = false
     }
 
     function updateScore(e) {
@@ -108,6 +112,7 @@ const App = () => {
               card.pick = false
               return card
             }))
+            restart = true
           }
         }
       })
@@ -128,9 +133,12 @@ const App = () => {
     })
 
     return (
-      <div>
+      <div className="App">
         <div className="header">
-          <div className="title">Disney Memory</div>
+          <div className="left">  
+            <div className="title">Disney Memory</div>
+            <div className="info">Click a card, then click a different one until you click all 10 cards</div>
+          </div>
           <div className="score">
             <div className="current-score">Current Score: {current}</div>
             <div className="best-score">Best Score: {best}</div>
