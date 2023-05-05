@@ -1,18 +1,23 @@
 import CardDisplay from "./components/CardDisplay";
+import Score from "./components/Score"
 import "./styles/style.css"
+import {useState} from "react";
 
 const App = () => {
+
+  let [query, setQuery] = useState('')
+
+  if(query === '') {
+    query = undefined
+  }
   
   return (
     <div className="App">
       <div className="header">
         <div className="title">Disney Memory</div>
-        <div className="score">
-          <div className="current-score">Current Score: </div>
-          <div className="best-score">Best Score: </div>
-        </div>
+        <Score cards={query}/>
       </div>
-      <CardDisplay/>
+      <CardDisplay onQuery={setQuery}/>
     </div>
   );
 }

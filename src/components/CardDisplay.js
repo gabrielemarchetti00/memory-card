@@ -1,6 +1,5 @@
-import React from "react";
 import uniqid from "uniqid";
-import { useState} from "react";
+import { useEffect, useState} from "react";
 import eldorado from '../images/eldorado.jpeg'
 import gobbo from '../images/gobbo.jpg'
 import hercules from '../images/hercules.webp'
@@ -75,7 +74,7 @@ const cardArray = [
     }
   ]
 
-const CardDisplay = () => {
+const CardDisplay = ({onQuery}) => {
     const [cards, setCards] = useState(cardArray)
 
     function handleClick(e) {
@@ -85,14 +84,28 @@ const CardDisplay = () => {
             }
             return card
         }))
-        console.log(cards)
+        onQuery(cards)
     }
+
+    useEffect(() => {
+      function shuffleCards(array) {
+        for (var i = array.length - 1; i > 0; i--) {
+            var j = Math.floor(Math.random() * (i + 1));
+            var temp = array[i];
+            array[i] = array[j];
+            array[j] = temp;
+        }
+        setCards(array)
+      }
+
+      document.querySelector(".card-img").addEventListener("click", shuffleCards(cards))
+    })
 
     return (
         <div className="card-container">
             {cards.map((card) => {
             return <div className="card" key={card.id}>
-                    <img src={card.image} alt='card-img' onClick={handleClick} id={card.text}></img>
+                    <img className="card-img" src={card.image} alt='card-img' onClick={handleClick} id={card.text}></img>
                    </div>;
              })}
         </div>
